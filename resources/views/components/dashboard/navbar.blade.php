@@ -24,9 +24,9 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="{{ route('dashboard.datatable.index') }}" class="side-menu side-menu--{{ Route::is("dashboard.datatable.index") ? "active" : ""}}">
+                            <a href="{{ route('dashboard.barang.index') }}" class="side-menu side-menu--{{ Route::is("dashboard.datatable.index") ? "active" : ""}}">
                                 <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                <div class="side-menu__title">Datatable</div>
+                                <div class="side-menu__title">Data Barang</div>
                             </a>
                         </li>
                         <li>

@@ -3,11 +3,10 @@
 @section('content')
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Datatable
+        Data Barang
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="{{ route('dashboard.tambahbarang.index') }}" class="button text-white bg-theme-1 shadow-md mr-2" >Add New Product</a>
-        {{-- uji coba --}}
+        <a href="{{ route('dashboard.tambahbarang.create') }}" class="button text-white bg-theme-1 shadow-md mr-2" >Add New Product</a>
         <div class="dropdown relative ml-auto sm:ml-0">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -34,12 +33,13 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($barangs as $barang)
             <tr>
                 <td class="border-b">
-                    <div class="font-medium whitespace-no-wrap">Nike Tanjun</div>
-                    <div class="text-gray-600 text-xs whitespace-no-wrap">Nike Tanjun</div>
+                    <div class="font-medium whitespace-no-wrap">{{ $barang->nama_barang }}</div>
+                    <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $barang->harga }}</div>
                 </td>
-                <td class="text-center border-b">108</td>
+                <td class="text-center border-b">{{ $barang->stok }}</td>
                 
                 <td class="w-40 border-b">
                     <div class="flex items-center sm:justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Active </div>
@@ -62,14 +62,57 @@
 
                 <td class="border-b w-5">
                     <div class="flex sm:justify-center items-center">
-                        <a class="flex items-center mr-3" href=""> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                        <a class="flex items-center text-theme-6" href=""> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        <form action="{{ route('dashboard.barang.edit', $barang->id) }}" method="GET">
+                            <button class="button px-2 mr-1 mb-2 bg-theme-1 text-white" type="submit">
+                                <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="edit" class="w-4 h-4"></i> </span>
+                            </button>
+                        {{-- <a class="delete-barang" href="{{ route('dashboard.barang.delete', $barang->id) }}">
+                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i>Delete 
+                        </a> --}}
+                    </form>
+                        <form action="{{ route('dashboard.barang.delete', $barang->id) }}" method="POST">
+                            
+                            @csrf
+                            @method('delete')
+                            
+                            <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white" type="submit">
+                                <span class="w-5 h-5 flex items-center justify-center"> <i data-feather="trash" class="w-4 h-4"></i> </span>
+                            </button>
+                        
+                        </form>
+
                     </div>
                 </td>
             </tr>
-            
+            @endforeach
         </tbody>
     </table>
 </div>
+{{-- <script>
+    $(document).ready(function() {
+        $('.delete-barang').on('click', function(e) {
+            e.preventDefault();
+            var barangId = $(this).data('id');
+            var csrfToken = "{{ csrf_token() }}";
+
+            if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/barang/' + barangId,
+                    data: {
+                        "_token": csrfToken
+                    },
+                    success: function(data) {
+                        // Handle success, seperti menghapus elemen dari tampilan
+                    },
+                    error: function(data) {
+                        // Handle error
+                    }
+                });
+            }
+        });
+    });
+</script> --}}
 <!-- END: Datatable -->
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 @endsection

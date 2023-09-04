@@ -24,7 +24,7 @@
         <div class="intro-x mt-10 xl:mt-24 text-gray-700 text-center xl:text-left">
             By signin up, you agree to our 
             <br>
-            <a class="text-theme-1" href="">Terms and Conditions</a> & <a class="text-theme-1" href="">Privacy Policy</a> 
+            <a class="text-theme-1" href="">Forgot Password</a> & <a class="text-theme-1" href="">Privacy Policy</a> 
         </div>
     </div>
 </div>

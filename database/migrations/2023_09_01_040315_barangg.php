@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('nama_barang')->nullable();
             $table->integer('stok')->nullable();
             $table->integer('harga')->nullable() ;
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('supplier');
+            // $table->text('deskripsi');
+            // $table->unsignedBigInteger('supplier_id');
+            // $table->foreign('supplier_id')->references('id')->on('supplier');
            
         });
     }

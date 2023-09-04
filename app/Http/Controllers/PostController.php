@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -10,8 +11,9 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('layouts.content.pos');
+    {   
+        $barangs = Barang::all();
+        return view('layouts.content.pos', compact('barangs'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PostController extends Controller
      */
     public function barang()
     {
-        return view('layouts.content.edit-barang');
+        // return view('layouts.content.edit-barang');
     }
 
     /**
@@ -35,7 +37,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

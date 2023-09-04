@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\DataTableController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
@@ -39,13 +39,19 @@ Route::get('/', function () {
             // Main Dashboard Route
             Route::get("/", [DashboardController::class, "index"])->name("index");
             // DataTable Route
-            Route::get("datatable", [DataTableController::class, "index"])->name("datatable.index");
+            Route::get("barang", [BarangController::class, "index"])->name("barang.index");
             // Post Route
             Route::get("pos", [PostController::class, "index"])->name("post.index");
             Route::get("edit", [PostController::class, "barang"])->name("edit-barang.index");
             Route::get("profile",[ProfileController::class, "index"])->name("profile.index");
             // Supplier Route
             Route::get("supplier", [SupplierController::class, "index"])->name("supplier.index");
-            Route::get("tambahbarang", [TambahBarangController::class, "index"])->name("tambahbarang.index");
+            Route::get("tambahbarang", [BarangController::class, "create"])->name("tambahbarang.create");
+            Route::post("tambahbarang", [BarangController::class, "store"])->name("tambahbarang.store");
+            Route::delete("/barang/{id}/delete", [BarangController::class, "delete"])->name("barang.delete");
+            // Route::delete('/barang/{id}', 'BarangController@delete')->name('barang.delete');
+            Route::get("/barang/{id}/edit", [BarangController::class, "edit"])->name("barang.edit");
+            Route::put("/barang/{id}", [BarangController::class, "update"])->name("barang.update");
+            Route::resource('barang',\App\Http\Controllers\BarangController::class);
         });
     });
